@@ -5,20 +5,20 @@ Phần mô tả sau đây về “Archery game” phục vụ mục đích là g
 
 [<img src="images\menu_game.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
 
-Trò chơi bắt đầu với màn hình Menu game với nhiều chọn lựa: 
-- Archery Game: chọn vào để bắt đầu chơi game
-- Setting: chọn vào để cài đặt các thông số của game
-- Charts: chọn vào để xem top 3 điểm cao nhất đạt được
-- Exit: vào màn hình nghỉ
+Trò chơi bắt đầu với màn hình **Menu game** với nhiều chọn lựa: 
+- **Archery Game:** chọn vào để bắt đầu chơi game
+- **Setting:** chọn vào để cài đặt các thông số của game
+- **Charts:** chọn vào để xem top 3 điểm cao nhất đạt được
+- **Exit:** vào màn hình nghỉ
 
 [<img src="images\objects_in_the_game.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
 
 #### Các đối tượng trong game:
-- Archey: Cung tên - nơi bắn ra mũi tên
-- Arrow: Mũi tên - bắn ra từ cung tên để phá hủy thiên thạch
-- Bang: Vụ nổ - xuất hiện khi thiên thạch bị phá hủy
-- Border: Ranh giới - vùng an toàn phải bảo vệ không cho thiên thạch rơi vào
-- Meteoroid: Thiên thạch - dối tượng bay về phía vùng an toàn có thể phá hủy bởi mũi tên
+- **Archey:** Cung tên - nơi bắn ra mũi tên
+- **Arrow:** Mũi tên - bắn ra từ cung tên để phá hủy thiên thạch
+- **Bang:** Vụ nổ - xuất hiện khi thiên thạch bị phá hủy
+- **Border:** Ranh giới - vùng an toàn phải bảo vệ không cho thiên thạch rơi vào
+- **Meteoroid:** Thiên thạch - dối tượng bay về phía vùng an toàn có thể phá hủy bởi mũi tên
 
 #### Cách chơi game: 
 - Trong game này bạn sẽ điều khiển 1 cung tên (Archery) di chuyển lên xuống chọn vị trí và bắn ra mũi tên (Arrow) tiêu diệt các đối tượng là các thiên thạch (Meteoroid) đang bay đến. Với số lượng mũi tên giới hạn, mỗi lần bắn tên số mũi tên sẽ giảm xuống và không bắn được nếu số mũi tên bằng “0” được hiển thị ở bên dưới góc trái màn hình hiển thị. 
@@ -28,9 +28,9 @@ Trò chơi bắt đầu với màn hình Menu game với nhiều chọn lựa:
 [<img src="images\game_over.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
 
 Game sẽ kết thúc khi thiên thạch (Meteoroid) chạm phải ranh giới (Border). Số điểm sẽ được lưu và bạn sẽ vào màn hình “Game Over” bạn có 3 lựa chọn là:
-- Restart: chơi lại.
-- Charts: vào xem bảng xếp hạng.
-- Home: về lại menu game.
+- **Restart:** chơi lại.
+- **Charts:** vào xem bảng xếp hạng.
+- **Home:** về lại menu game.
 
 ### 1.2 Phần cứng
 
@@ -94,6 +94,30 @@ Lập trình event-driven tạo điều kiện cho các ứng dụng tương tá
 - Time tick – Game over: mô phỏng trạng thái xử lý lúc game over.
 
 #### Chú thích: 
+<details>
+
+(1)	Time tick: là một Signal được tạo ra bởi 1 timer thường xuyên. Time tick kiểm soát thời gian tính toán logic và cập nhật khung hình của game
+(2)	Archery – time tick: tại time tick sẽ cập nhật trạng thái của Archery và hiển thị trên màn hình (SCREEN)
+(3)	Arrow[n] – time tick: tại time tick vì arrow[n].visible = 0 nên bỏ qua cũng không hiển thị ra màn hình 
+(4)	Bang [n] – time tick: tại time tick vì bang[n].visible = 0 nên bỏ qua cũng không hiển thị ra màn hình 
+(5)	Meteoroid[n] – time tick: tại time tick đối tượng Thiên thạch (Meteoroid) chạy 2 signal để thay đổi vị trí của thiên thạch và kiểm tra thiên thạch có bị mũi tên bắn trúng. Cập nhật vị trí hiện tại để hiển thị trên màn hình.
+(6)	Border[n] – time tick: tại time tick đối tượng Border kiểm tra update vị trí hiện tại và so sánh vị trí với Meteoroid để kiểm tra điều kiện “game over”. 
+(7)	Screen: là màn hình hiện thị của game, là nơi tiếp nhận các thông số của đối tượng để hiển thị ra màn hình.
+(8)	Player control: gồm 3 thao tác là [Mode], [Up], [Down]. [Mode] điều khiển Arrow[n] bắn ra.
+[Up] / [Down] điều khiển vị trí của Archery.
+(9)	Archery – control: vị trí mới của cung tên sau khi được điều khiển.
+(10)	Arrow – control: điều khiển mũi tên bắn ra Arrow[n].visible = 1.
+(11)	Archery – time tick: Cập nhật vị trí Archery sang cho Arrow[n] và Screen.
+(12)	Arrow[n] – time tick: Vì lần này mũi tên đã được bắn ra nên time tick sẽ chuyển thành Arrow_run.
+(13)	Meteoroid[n] – time tick: Arrow bắn trúng Meteoroid nên sẽ chuyển sang cập nhật trạng thái.
+(14)	Meteoroid_detonator: chuyển Bang[n].visible = 1 và số điểm +10
+(15)	Bang[n] – time tick: Bang nhận thông tin vị trí của Meteoroid rồi cập nhật thông tin hiển thị ra màn hình.
+(16)	Border – time tick: Border update tùy thuộc vào số điểm hiện tại của game nếu số điểm tăng lên 200 thì sẽ dịch border đi một đoạn rồi cập nhật ra màn hình.
+(17)	Screen: màn hình cập nhật các giá trị mới và hiển thị các đối tượng ra màn hình.
+(18)	Trường hợp: Meteoroid trùng vị trí với Border đạt điều kiện “game over”
+(19)	Exit: Border gửi tín hiệu Reset để reset các đối tượng.
+(20)	Screen: Exit gửi đến screen tín hiệu exit để hiển thị ra màn hình “Game Over”
+</details>
 
 #### Các task sử dụng trong game:
 |Tasks ID               | Task level        | App tasks                 |
