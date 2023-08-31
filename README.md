@@ -185,6 +185,7 @@ Lập trình event-driven tạo điều kiện cho các ứng dụng tương tá
 - AR_GAME_ARCHERY_RESET - Cài đặt lại thuộc tính trước khi **End Game**
 
 **Sequence diagram:**
+
 [<img src="images\archery_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
 
 #### 4.2.2 Mũi tên (Arrow)
@@ -208,6 +209,7 @@ Lập trình event-driven tạo điều kiện cho các ứng dụng tương tá
 - AR_GAME_ARROW_RESET - Cài đặt lại thuộc tính trước khi **End Game**
 
 **Sequence diagram:**
+
 [<img src="images\arrow_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
 
 #### 4.2.3 Vụ nổ (Bang)
@@ -230,8 +232,8 @@ Lập trình event-driven tạo điều kiện cho các ứng dụng tương tá
 - AR_GAME_BANG_RESET - Cài đặt lại thuộc tính trước khi **End Game**
 
 **Sequence diagram:**
-[<img src="images\bang_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
 
+[<img src="images\bang_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
 
 #### 4.2.4 Ranh giới (Border)
 
@@ -254,6 +256,7 @@ Lập trình event-driven tạo điều kiện cho các ứng dụng tương tá
 - AR_GAME_CHECK_GAME_OVER - Kiểm tra thiên thạch chạm vào ranh giới
 
 **Sequence diagram:**
+
 [<img src="images\border_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
 
 #### 4.2.5 Thiên thạch (Meteoroid)
@@ -277,6 +280,7 @@ Lập trình event-driven tạo điều kiện cho các ứng dụng tương tá
 - AR_GAME_METEOROID_RESET - Cài đặt lại thuộc tính trước khi **End Game**
 
 **Sequence diagram:**
+
 [<img src="images\meteoroid_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
 
 #### 4.2.6 Màn hình trò chơi (Screen archery game)
@@ -299,6 +303,7 @@ Lập trình event-driven tạo điều kiện cho các ứng dụng tương tá
 - AR_GAME_EXIT_GAME - Lưu điểm và chuyển màn hình **Game Over**
 
 **Sequence diagram:**
+
 [<img src="images\screen_sequence.png" width="720"/>](https://github.com/QuocBuu/archery_game.git)
 
 ## V. Hiển thị và âm thanh trong trò chơi bắn cung
@@ -309,6 +314,7 @@ Trong trò chơi, màn hình hiện thị là 1 màn hình LCD có kích thướ
 Đồ họa được thiết kế từng phần theo từng đối tượng bằng phần mềm [Photopea](https://www.photopea.com/)
 
 #### Thiết kế đồ họa cho các đối tượng
+
 [<img src="images\bitmap.png" width="720"/>](https://github.com/QuocBuu/archery_game.git)
 
 **Ghi chú:** trong thiết kế trên có nhiều hoạt ảnh cho cùng 1 đối tượng là để tạo animation cho đối tượng đó tăng cảm giác lúc chơi game.
