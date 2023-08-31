@@ -60,7 +60,7 @@ Lập trình hướng đối tượng (Object-Oriented Programming - OOP) là m�
 **Thuộc tính (Property):** Thuộc tính là các biến được định nghĩa trong lớp để lưu trữ thông tin về trạng thái của đối tượng. Mỗi đối tượng có thể có các giá trị khác nhau cho các thuộc tính tương ứng.
 
 ### 2.2 Mô hình hóa đối tượng trong trò chơi bắn cung
-#### Các đối tượng trong trò chơi
+#### Các đối tượng trong trò chơi: Cung tên (Archey), Mũi tên (Arrow), Vụ nổ (Bang), Ranh giới (Border), Thiên thạch (Meteoroid)
 Ứng dùng kết hợp giữa lập trình hướng đối tượng và event-driven giúp xác định các thuộc tính có trong đối tượng và chia dối tượng ra làm nhiều event khác nhau để tối ưu hóa quá trình xử lý.
 
 ## III. Lập trình event-driven trong trò chơi bắn cung
