@@ -47,22 +47,6 @@ KIT cũng tích hợp RS485, NRF24L01+, và Flash lên đến 32MB, thích hợp
 - Nút **[Mode]** dùng để chọn vào các mục trong Menu game hay bắn ra các mũi tên lúc chơi game.
 - Nút **[Reset]** để khởi động lại kit.
 
-## II. Lập trình hướng đối tượng trong trò chơi bắn cung
-### 2.1 Lập trình hướng đối tượng và các khái niệm cơ bản
-#### Lập trình hướng đối tượng
-Lập trình hướng đối tượng (Object-Oriented Programming - OOP) là một phương pháp lập trình tập trung vào việc xây dựng các đối tượng và tương tác giữa chúng. Trong lập trình hướng đối tượng, các đối tượng được coi là các thực thể trong thế giới thực, có trạng thái và hành vi riêng.
-
-#### Các khái niệm cơ bản
-**Lớp (Class):** Lớp là một mô hình hoặc bản thiết kế cho một loại đối tượng cụ thể. Nó định nghĩa các thuộc tính (properties) và phương thức (methods) mà các đối tượng thuộc lớp đó sẽ có.
-
-**Đối tượng (Object):** Đối tượng là một phiên bản cụ thể được tạo ra từ một lớp. Nó có trạng thái (state) duy nhất được xác định bởi các giá trị của các thuộc tính và có thể thực hiện các hành vi
-
-**Thuộc tính (Property):** Thuộc tính là các biến được định nghĩa trong lớp để lưu trữ thông tin về trạng thái của đối tượng. Mỗi đối tượng có thể có các giá trị khác nhau cho các thuộc tính tương ứng.
-
-### 2.2 Mô hình hóa đối tượng trong trò chơi bắn cung
-#### Các đối tượng trong trò chơi: Cung tên (Archey), Mũi tên (Arrow), Vụ nổ (Bang), Ranh giới (Border), Thiên thạch (Meteoroid)
-Ứng dùng kết hợp giữa lập trình hướng đối tượng và event-driven giúp xác định các thuộc tính có trong đối tượng và chia dối tượng ra làm nhiều event khác nhau để tối ưu hóa quá trình xử lý.
-
 ## III. Lập trình event-driven trong trò chơi bắn cung
 ### 3.1 Lập trình event-driven và các khái niệm cơ bản
 #### Lập trình event-driven
@@ -110,8 +94,7 @@ Lập trình event-driven tạo điều kiện cho các ứng dụng tương tá
 
 (7)	Screen: là màn hình hiện thị của game, là nơi tiếp nhận các thông số của đối tượng để hiển thị ra màn hình.
 
-(8)	Player control: gồm 3 thao tác là [Mode], [Up], [Down]. [Mode] điều khiển Arrow[n] bắn ra.
-[Up] / [Down] điều khiển vị trí của Archery.
+(8)	Player control: gồm 3 thao tác là [Mode], [Up], [Down]. [Mode] điều khiển Arrow[n] bắn ra. [Up] / [Down] điều khiển vị trí của Archery.
 
 (9)	Archery – control: vị trí mới của cung tên sau khi được điều khiển.
 
