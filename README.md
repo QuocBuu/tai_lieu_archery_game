@@ -165,7 +165,7 @@ Trong game này Signal có các tác dụng như:
 ## III. Lập trình xử lý - OBJECT
 ### 3.1 Cung tên (Archery)
 
-**Mô tả:** Cung tên là đối tượng cung tên có thể di chuyển lên, xuống trong trò chơi được điều khiển bởi 2 nút **[Up],[Down]** trên Kit
+**Mô tả:** Cung tên là đối tượng cung tên có thể di chuyển lên, xuống trong trò chơi được điều khiển bởi 2 nút **[Up], [Down]** trên Kit
 
 **Thuộc tính:** 
 - Vị trí tạo độ: x (_uint32_t_), y (_uint32_t_)
