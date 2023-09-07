@@ -715,16 +715,377 @@ Trong trò chơi, màn hình hiện thị là 1 màn hình LCD có kích thướ
 Đồ họa được thiết kế từng phần theo từng đối tượng bằng phần mềm [Photopea](https://www.photopea.com/)
 
 #### Thiết kế đồ họa cho các đối tượng
-[<img src="images\bitmap.png" width="720"/>](https://github.com/QuocBuu/archery_game.git)
+[<img src="images\table_bitmap.png" width="720"/>](https://github.com/QuocBuu/archery_game.git)
 
 **Ghi chú:** trong thiết kế trên có nhiều hoạt ảnh cho cùng 1 đối tượng là để tạo animation cho đối tượng đó tăng cảm giác lúc chơi game.
 
-### 4.2 Âm thanh
+**Code:**
+
+<details>
+
+**Archer display:**
+```sh
+void ar_game_archery_display() {
+	if (archery.visible == WHITE && settingsetup.num_arrow != 0) {
+		view_render.drawBitmap(	archery.x, \
+								archery.y - 10, \
+								bitmap_archery_I, \
+								SIZE_BITMAP_ARCHERY_X, \
+								SIZE_BITMAP_ARCHERY_Y, \
+								WHITE);
+	}
+	else if (archery.visible == WHITE && settingsetup.num_arrow == 0) {
+		view_render.drawBitmap(	archery.x, \
+								archery.y - 10, \
+								bitmap_archery_II, \
+								SIZE_BITMAP_ARCHERY_X, \
+								SIZE_BITMAP_ARCHERY_Y, \
+								WHITE);
+	}
+}
+```
+
+**Arrow display:**
+```sh
+void ar_game_arrow_display() {
+	for (uint8_t i = 0; i < MAX_NUM_ARROW; i++) {
+		if (arrow[i].visible == WHITE) {
+			view_render.drawBitmap(	arrow[i].x, \
+									arrow[i].y, \
+									bitmap_arrow, \
+									SIZE_BITMAP_ARROW_X, \
+									SIZE_BITMAP_ARROW_Y, \
+									WHITE);
+		}
+	}
+}
+```
+
+**Meteoroid display:**
+```sh
+void ar_game_meteoroid_display() {
+	for (uint8_t i = 0; i < NUM_METEOROIDS; i++) {
+		if (meteoroid[i].visible == WHITE) {
+			if (meteoroid[i].action_image == 1) {
+				view_render.drawBitmap(	meteoroid[i].x, \
+										meteoroid[i].y, \
+										bitmap_meteoroid_I, \
+										SIZE_BITMAP_METEOROIDS_X, \
+										SIZE_BITMAP_METEOROIDS_Y, \
+				 						WHITE);
+			}
+			else if (meteoroid[i].action_image == 2) {
+				view_render.drawBitmap(	meteoroid[i].x, \
+										meteoroid[i].y, \
+										bitmap_meteoroid_II, \
+										SIZE_BITMAP_METEOROIDS_X, \
+										SIZE_BITMAP_METEOROIDS_Y, \
+										WHITE);
+			}
+			else if (meteoroid[i].action_image == 3) {
+				view_render.drawBitmap(	meteoroid[i].x, \
+										meteoroid[i].y, \
+										bitmap_meteoroid_III, \
+										SIZE_BITMAP_METEOROIDS_X, \
+										SIZE_BITMAP_METEOROIDS_Y, \
+				 						WHITE);
+			}
+		}
+	}
+}
+```
+
+**Bang display:**
+```sh
+void ar_game_bang_display() {
+	for (uint8_t i = 0; i < NUM_BANG; i++) {
+		if (bang[i].visible == WHITE) {
+			if (bang[i].action_image == 1) {
+				view_render.drawBitmap(	bang[i].x, \
+										bang[i].y, \
+										bitmap_bang_I, \
+										SIZE_BITMAP_BANG_I_X, \
+										SIZE_BITMAP_BANG_I_Y, \
+										WHITE);
+			}
+			else if (bang[i].action_image == 2) {
+				view_render.drawBitmap(	bang[i].x, \
+										bang[i].y, \
+										bitmap_bang_II, \
+										SIZE_BITMAP_BANG_I_X, \
+										SIZE_BITMAP_BANG_I_Y, \
+				 						WHITE);
+			}
+			else if (bang[i].action_image == 3) {
+				view_render.drawBitmap( bang[i].x + 2, \
+										bang[i].y - 1, \
+										bitmap_bang_III, \
+										SIZE_BITMAP_BANG_II_X, \
+										SIZE_BITMAP_BANG_II_Y, \
+				 						WHITE);
+			}
+		}
+	}
+}
+```
+
+**Border display:**
+```sh
+void ar_game_border_display() {
+	if (border.visible == WHITE) {
+		view_render.drawFastVLine(	border.x, \
+									AXIS_Y_BORDER_ON, \
+									AXIS_Y_BORDER_UNDER, \
+									WHITE);
+		for (uint8_t i = 0; i < NUM_METEOROIDS; i++) {
+			view_render.fillCircle(	border.x, \
+									meteoroid[i].y + 5, \
+									1, \
+									WHITE);
+		}
+	}
+}
+```
+
+**Game frame display:**
+```sh
+void ar_game_frame_display() {
+	view_render.setTextSize(1);
+	view_render.setTextColor(WHITE);
+	view_render.setCursor(2,55);
+	view_render.print("Arrow:");
+	view_render.print(settingsetup.num_arrow);
+	view_render.setCursor(60,55);
+	view_render.print(" Score:");
+	view_render.print(ar_game_score);
+	view_render.drawLine(0, LCD_HEIGHT, 	LCD_WIDTH, LCD_HEIGHT,		WHITE);
+	view_render.drawLine(0, LCD_HEIGHT-10, 	LCD_WIDTH, LCD_HEIGHT-10,	WHITE);
+	view_render.drawRect(0, 0, 128, 64, 1);
+}
+```
+
+**Screen display:**
+```sh
+void view_scr_archery_game() {
+	if (ar_game_status == GAME_ON) {
+		ar_game_frame_display();
+		ar_game_archery_display();
+		ar_game_arrow_display();
+		ar_game_meteoroid_display();
+		ar_game_bang_display();
+		ar_game_border_display();
+	}
+	else if (ar_game_status == GAME_OVER) {
+		view_render.clear();
+		view_render.setTextSize(2);
+		view_render.setTextColor(WHITE);
+		view_render.setCursor(17, 24);
+		view_render.print("YOU LOSE");
+	}
+}
+```
+
+</details>
+
+### 4.3 Âm thanh
 Âm thành được thiết kế qua wed [Arduino Music](https://www.instructables.com/Arduino-Music-From-Sheet-Music/)
 
 Trong trò chơi, để trò chơi thêm phần xin động thì việc có âm thanh là điều cần thiết. 
 
 Các âm thanh cần thiết kế: nút nhấn, bắn tên, vụ nổ, nhạc game.
+
+**Code:**
+<details>
+
+```sh
+// Âm thanh Bắt đầu game 
+BUZZER_PlayTones(tones_SMB);
+
+// Âm thanh Vụ nổ 
+BUZZER_PlayTones(tones_BUM);
+
+// Âm thanh nút nhấn
+BUZZER_PlayTones(tones_cc);
+
+// Âm thanh cảnh báo
+BUZZER_PlayTones(tones_3beep);
+
+// Merry Christmas
+BUZZER_PlayTones(tones_merryChrismast);
+
+/*________________BUZZER______________*/
+
+void BUZZER_Sleep(bool sleep);
+/*  sleep = 0 : bật âm thanh 
+    sleep = 1 : tắt âm thanh */
+static const Tone_TypeDef tones_BUM[] = {
+	{3000,3},
+	{4500,6},
+	{   0,0}
+};
+
+static const Tone_TypeDef tones_cc[] = {
+	{2000,2}, 
+	{   0,0}, 
+};
+
+static const Tone_TypeDef tones_startup[] = {
+	{2000,3},
+	{   0,3},
+	{3000,3},
+	{   0,3},
+	{4000,3},
+	{   0,3},
+	{1200,4},
+	{   0,6},
+	{4500,6},
+	{   0,0}     // <-- tones end
+};
+
+static const Tone_TypeDef tones_3beep[] = {
+	{4000, 3},
+	{   0,10},
+	{1000, 6},
+	{   0,10},
+	{4000, 3},
+	{   0, 0}
+};
+
+// "Super Mario bros." =)
+static const Tone_TypeDef tones_SMB[] = {
+	{2637,18}, // E7 x2
+	{   0, 9}, // x3
+	{2637, 9}, // E7
+	{   0, 9}, // x3
+	{2093, 9}, // C7
+	{2637, 9}, // E7
+	{   0, 9}, // x3
+	{3136, 9}, // G7
+	{   0,27}, // x3
+	{1586, 9}, // G6
+	{   0,27}, // x3
+
+	{2093, 9}, // C7
+	{   0,18}, // x2
+	{1586, 9}, // G6
+	{   0,18}, // x2
+	{1319, 9}, // E6
+	{   0,18}, // x2
+	{1760, 9}, // A6
+	{   0, 9}, // x1
+	{1976, 9}, // B6
+	{   0, 9}, // x1
+	{1865, 9}, // AS6
+	{1760, 9}, // A6
+	{   0, 9}, // x1
+
+	{1586,12}, // G6
+	{2637,12}, // E7
+	{3136,12}, // G7
+	{3520, 9}, // A7
+	{   0, 9}, // x1
+	{2794, 9}, // F7
+	{3136, 9}, // G7
+	{   0, 9}, // x1
+	{2637, 9}, // E7
+	{   0, 9}, // x1
+	{2093, 9}, // C7
+	{2349, 9}, // D7
+	{1976, 9}, // B6
+	{   0,18}, // x2
+
+	{2093, 9}, // C7
+	{   0,18}, // x2
+	{1586, 9}, // G6
+	{   0,18}, // x2
+	{1319, 9}, // E6
+	{   0,18}, // x2
+	{1760, 9}, // A6
+	{   0, 9}, // x1
+	{1976, 9}, // B6
+	{   0, 9}, // x1
+	{1865, 9}, // AS6
+	{1760, 9}, // A6
+	{   0, 9}, // x1
+
+	{1586,12}, // G6
+	{2637,12}, // E7
+	{3136,12}, // G7
+	{3520, 9}, // A7
+	{   0, 9}, // x1
+	{2794, 9}, // F7
+	{3136, 9}, // G7
+	{   0, 9}, // x1
+	{2637, 9}, // E7
+	{   0, 9}, // x1
+	{2093, 9}, // C7
+	{2349, 9}, // D7
+	{1976, 9}, // B6
+
+	{   0, 0}
+};
+
+// Merry Christmas
+static const Tone_TypeDef tones_merryChrismast[] = {
+	{2637, 9}, // E7
+	{   0, 9}, // x1
+	{2637, 9}, // E7
+	{   0, 9}, // x1
+	{2637, 9}, // E7
+	{   0,18}, // x2
+
+	{2637, 9}, // E7
+	{   0, 9}, // x1
+	{2637, 9}, // E7
+	{   0, 9}, // x1
+	{2637, 9}, // E7
+	{   0,18}, // x2
+
+	{2637, 9}, // E7
+	{   0, 9}, // x1
+	{3136, 9}, // G7
+	{   0, 9}, // x1
+	{2093, 9}, // C7
+	{   0, 9}, // x1
+	{2349, 9}, // D7
+	{   0, 9}, // x1
+	{2637, 9}, // E7
+	{   0,24}, // x2
+
+	{2794, 9}, // F7
+	{   0, 9}, // x1
+	{2794, 9}, // F7
+	{   0, 9}, // x1
+	{2794, 9}, // F7
+	{   0, 9}, // x1
+	{2794, 9}, // F7
+	{   0, 9}, // x1
+	{2794, 9}, // F7
+	{   0, 9}, // x1
+	{2637, 9}, // E7
+	{   0, 9}, // x1
+	{2637, 9}, // E7
+	{   0, 9}, // x1
+	{2637, 9}, // E7
+	{   0, 9}, // x1
+	{2637, 9}, // E7
+	{   0, 9}, // x1
+	{2637, 9}, // E7
+	{   0, 9}, // x1
+	{2349, 9}, // D7
+	{   0, 9}, // x1
+	{2349, 9}, // D7
+	{   0, 9}, // x1
+	{2637, 9}, // E7
+	{   0, 9}, // x1
+	{2349, 9}, // D7
+	{   0, 9}, // x1
+	{3136, 9}, // G7
+	{   0, 0}  // <-- tones end
+};
+```
+
+</details>
 
 **Ghi chú:** Nêu không có thời gian hay không có kiếu âm nhạc thì tốt nhất nên dùng các thư viện trên github
 
