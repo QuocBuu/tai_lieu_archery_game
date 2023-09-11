@@ -212,12 +212,8 @@ Trong game này Signal có các tác dụng như:
 - AR_GAME_ARCHERY_RESET - Cài đặt lại thuộc tính trước khi **End Game**
 
 **Sequence diagram:**
-<<<<<<< HEAD
-[<img src="images\sequence_object\archery_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
-=======
 
-[<img src="images\archery_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
->>>>>>> dba93ae84398794c9b537e8e2f1ac0ef6b65062c
+[<img src="images\sequence_object\archery_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
 
 **Code:**
 <details>
@@ -316,12 +312,8 @@ void ar_game_archery_handle(ak_msg_t* msg) {
 - AR_GAME_ARROW_RESET - Cài đặt lại thuộc tính trước khi **End Game**
 
 **Sequence diagram:**
-<<<<<<< HEAD
-[<img src="images\sequence_object\arrow_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
-=======
 
-[<img src="images\arrow_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
->>>>>>> dba93ae84398794c9b537e8e2f1ac0ef6b65062c
+[<img src="images\sequence_object\arrow_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
 
 **Code:**
 <details>
@@ -438,12 +430,8 @@ void ar_game_arrow_handle(ak_msg_t* msg) {
 - AR_GAME_BANG_RESET - Cài đặt lại thuộc tính trước khi **End Game**
 
 **Sequence diagram:**
-<<<<<<< HEAD
-[<img src="images\sequence_object\bang_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
-=======
 
-[<img src="images\bang_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
->>>>>>> dba93ae84398794c9b537e8e2f1ac0ef6b65062c
+[<img src="images\sequence_object\bang_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
 
 **Code:**
 <details>
@@ -536,12 +524,8 @@ void ar_game_bang_handle(ak_msg_t* msg) {
 - AR_GAME_CHECK_GAME_OVER - Kiểm tra thiên thạch chạm vào ranh giới
 
 **Sequence diagram:**
-<<<<<<< HEAD
-[<img src="images\sequence_object\border_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
-=======
 
-[<img src="images\border_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
->>>>>>> dba93ae84398794c9b537e8e2f1ac0ef6b65062c
+[<img src="images\sequence_object\border_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
 
 **Code:**
 <details>
@@ -642,12 +626,8 @@ void ar_game_border_handle(ak_msg_t* msg) {
 - AR_GAME_METEOROID_RESET - Cài đặt lại thuộc tính trước khi **End Game**
 
 **Sequence diagram:**
-<<<<<<< HEAD
-[<img src="images\sequence_object\meteoroid_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
-=======
 
-[<img src="images\meteoroid_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
->>>>>>> dba93ae84398794c9b537e8e2f1ac0ef6b65062c
+[<img src="images\sequence_object\meteoroid_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
 
 **Code:**
 <details>
@@ -767,10 +747,7 @@ Trong trò chơi, màn hình hiện thị là 1 màn hình LCD có kích thướ
 Đồ họa được thiết kế từng phần theo từng đối tượng bằng phần mềm [Photopea](https://www.photopea.com/)
 
 #### Thiết kế đồ họa cho các đối tượng
-<<<<<<< HEAD
-=======
 
->>>>>>> dba93ae84398794c9b537e8e2f1ac0ef6b65062c
 [<img src="images\table_bitmap.png" width="720"/>](https://github.com/QuocBuu/archery_game.git)
 
 **Ghi chú:** trong thiết kế trên có nhiều hoạt ảnh cho cùng 1 đối tượng là để tạo animation cho đối tượng đó tăng cảm giác lúc chơi game.
