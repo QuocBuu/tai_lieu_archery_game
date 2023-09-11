@@ -121,6 +121,7 @@ Việc liệt kê các thuộc tính của đối tượng trong game có các t
 - Giảm rủi ro và lỗi: Khi bạn xác định trước các thuộc tính cần thiết, bạn giảm thiểu khả năng bỏ sót hoặc nhầm lẫn trong việc xử lý và sử dụng các thuộc tính.
 
 **Name:** struct ar_game_object_t
+
 **Cấu trúc:** 
 ```sh
 typedef struct {
@@ -128,7 +129,6 @@ typedef struct {
     uint32_t x, y;
     uint8_t action_image;
 } ar_game_object_t;
-
 ```
 - **visible:** Thuộc tính quy định hiển thị
 - **x, y:** Thuộc tính tọa độ
