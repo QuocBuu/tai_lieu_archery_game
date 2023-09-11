@@ -120,26 +120,17 @@ Việc liệt kê các thuộc tính của đối tượng trong game có các t
 - Thiết kế cấu trúc dữ liệu: Liệt kê thuộc tính giúp xác định cấu trúc dữ liệu phù hợp để lưu trữ thông tin của đối tượng.
 - Giảm rủi ro và lỗi: Khi bạn xác định trước các thuộc tính cần thiết, bạn giảm thiểu khả năng bỏ sót hoặc nhầm lẫn trong việc xử lý và sử dụng các thuộc tính.
 
-**Name:** struct ar_game_object_t
-
-**Cấu trúc:** 
-```sh
-typedef struct {
-    bool visible;
-    uint32_t x, y;
-    uint8_t action_image;
-} ar_game_object_t;
-```
+**Thuộc tính:** 
 - **visible:** Thuộc tính quy định hiển thị
 - **x, y:** Thuộc tính tọa độ
 - **action_image:** Thuộc tính quy định hoạt ảnh
 
-Áp dụng Struct trên cho các đối tượng:
-- ar_game_object_t archery
-- ar_game_object_t arrow
-- ar_game_object_t meteoroid
-- ar_game_object_t bang
-- ar_game_object_t border
+Áp dụng struct trên cho các đối tượng:
+- ar_game_archery_t archery
+- ar_game_arrow_t arrow
+- ar_game_bang_t bang
+- ar_game_border_t border
+- ar_game_meteoroid_t meteoroid
 
 Các biến quan trọng:
 - ar_game_score: Điểm của trò chơi
