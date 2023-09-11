@@ -60,7 +60,7 @@ KIT cũng tích hợp RS485, NRF24L01+, và Flash lên đến 32MB, thích hợp
 ### 2.1 Sơ đồ trình tự (The sequence diagram)
 **Sơ đồ trình tự** được sử dụng để mô tả và hiển thị trình tự của các thông điệp và tương tác giữa các đối tượng trong một hệ thống.
 
-[<img src="images\All_game_UML-Copy of Page-1.drawio.png" width="720"/>](https://github.com/QuocBuu/archery_game.git)
+[<img src="images\sequence_object\All_game_UML.png" width="720"/>](https://github.com/QuocBuu/archery_game.git)
 ### Ghi chú:
 **SCREEN_ENTRY:** Cài đặt các thiết lâp ban đầu cho đối tượng trong game.
 - **Level setup:** Thiết lập thông số cấp độ cho game.
@@ -73,32 +73,24 @@ KIT cũng tích hợp RS485, NRF24L01+, và Flash lên đến 32MB, thích hợp
 - **STATUS (GAME_ON):** Cập nhật trạng thái game -> GAME_ON
 
 **GAME PLAY:** Quá trình hoạt động của game.
+
 **GAME PLAY - Nomal:** Game hoạt động ở trạng thái bình thường.
 - **AR_GAME_TIME_TICK:** Signal do Timer - Time tick gửi đến.
 - **AR_GAME_ARCHERY_UPDATE:** Cập nhật trạng thái Cung tên.
-- **AR_GAME_ARROW_RUN:** Mũi tên di chuyển nhưng hiện không có mũi tên được bắn ra nên không cập nhật.
-- **AR_GAME_METEOROID_RUN:** Cập nhật việc di chuyển của các Thiên thạch.
-- **AR_GAME_METEOROID_DETONATOR:** Kiểm tra các Thiên thạch có bị Mũi tên phá hủy, hiện giờ không có Mũi tên bắn ra nên không cập nhật.
-- **AR_GAME_BANG_UPDATE:** Không có Thiên thạch bị phá hủy nên không có Vụ nổ được cập nhật.
-- **AR_GAME_BORDER_UPDATE:** Kiểm tra số điểm hiện tại không đủ để cập nhật nên không tăng độ khó game.
-- **AR_GAME_CHECK_GAME_OVER:** Kiểm tra Thiên thạch không chạm vào Ranh giới nên không gửi Signal - **AR_GAME_RESET**
+- **AR_GAME_ARROW_RUN:** Cập nhật di chuyển của các Mũi tên theo thời gian.
+- **AR_GAME_METEOROID_RUN:** Cập nhật di chuyển của các Thiên thạch theo thời gian.
+- **AR_GAME_METEOROID_DETONATOR:** Kiểm tra các Thiên thạch có bị Mũi tên phá hủy.
+- **AR_GAME_BANG_UPDATE:** Cập nhật hoạt ảnh Vụ nổ theo thời gian
+- **AR_GAME_BORDER_UPDATE:** Kiểm tra số điểm hiện tại để cập nhật tăng độ khó game.
+- **AR_GAME_CHECK_GAME_OVER:** Kiểm tra Thiên thạch chạm vào Ranh giới nếu chạm vào thì gửi Signal - **AR_GAME_RESET** đến **Screen**
 
 **GAME PLAY - Action:** Game hoạt động ở trạng thái có tác động của các nút nhấn.
 - **AR_GAME_ARCHERY_UP:** Player nhấn nút **[Up]** điều khiển Cung tên di chuyển lên.
 - **AR_GAME_ARCHERY_DOWN:** Player nhấn nút **[Down]** điều khiển Cung tên di chuyển xuống.
 - **AR_GAME_ARROW_SHOOT:** Player nhấn nút **[Mode]** điều khiển bắn mũi tên ra.
-- **AR_GAME_TIME_TICK:** Signal do Timer - Time tick gửi đến.
-- **AR_GAME_ARCHERY_UPDATE:** Cập nhật trạng thái hiện tại của Cung tên sau khi bị điều khiển.
-- **AR_GAME_ARROW_RUN:** Đã có mũi tên được bắn ra - Cập nhật trạng thái di chuyển của mũi tên.
-- **AR_GAME_METEOROID_RUN:** Cập nhật việc di chuyển của các Thiên thạch. 
-- **AR_GAME_METEOROID_DETONATOR:** Kiểm tra Mũi tên bắn trúng Thiên thạch, cộng điểm vào Score, cập nhật trạng thái cho Mũi tên, Thiên thạch và Vụ nổ.
-- **AR_GAME_BANG_UPDATE:** Cập nhật trạng thái hiển thị của Vụ nổ - Sau 3 lần cập nhật tự động reset Vụ nổ.
-- **AR_GAME_BORDER_UPDATE:** Kiểm tra số điểm hiện tại chia hết cho 200 thì tăng tốc độ Thiên thạch lên và cộng 10 điểm.
-- **AR_GAME_CHECK_GAME_OVER:** Kiểm tra Thiên thạch không chạm vào Ranh giới nên không gửi Signal - **AR_GAME_RESET**
 
 **GAME PLAY - LOSE:** Game hoạt động lúc phát hiện Thiên thạch chạm vào Ranh giới.
-- **AR_GAME_METEOROID_RUN:** Thiên thạch di chuyển.
-- **AR_GAME_CHECK_GAME_OVER:** Kiểm tra thấy có Thiên thạch chạm vào Ranh giới. Gửi Signal - **AR_GAME_RESET** đến Screen
+- **AR_GAME_CHECK_GAME_OVER:** Kiểm tra thấy có Thiên thạch chạm vào Ranh giới. Gửi Signal - **AR_GAME_RESET** đến **Screen**
 
 **RESET GAME:** Quá trình cài đặt lại các thông số trước khi thoát game.
 - **STATUS (GAME_OVER):** Cập nhật trạng thái game -> GAME_OVER
@@ -117,6 +109,7 @@ KIT cũng tích hợp RS485, NRF24L01+, và Flash lên đến 32MB, thích hợp
 - **STATUS (GAME_OFF):** Cập nhật trạng thái game -> GAME_OFF
 - **Change the screeen:** Chuyển màn hình
 
+
 ### 2.2 Quản lý tài nguyên đối tượng
 
 Sau khi xác định được các đối tượng trong game mà chúng ta cần, tiếp theo chúng ta phải liệt kê ra các thuộc tính, các task, các signal và bitmap mà trong game sẽ sử dụng tới.
@@ -127,10 +120,44 @@ Việc liệt kê các thuộc tính của đối tượng trong game có các t
 - Thiết kế cấu trúc dữ liệu: Liệt kê thuộc tính giúp xác định cấu trúc dữ liệu phù hợp để lưu trữ thông tin của đối tượng.
 - Giảm rủi ro và lỗi: Khi bạn xác định trước các thuộc tính cần thiết, bạn giảm thiểu khả năng bỏ sót hoặc nhầm lẫn trong việc xử lý và sử dụng các thuộc tính.
 
-[<img src="images\table_variable.png" width="720720"/>](https://github.com/QuocBuu/archery_game.git)
+**Name:** struct ar_game_object_t
+**Cấu trúc:** 
+```sh
+typedef struct {
+    bool visible;
+    uint32_t x, y;
+    uint8_t action_image;
+} ar_game_object_t;
+
+```
+- **visible:** Thuộc tính quy định hiển thị
+- **x, y:** Thuộc tính tọa độ
+- **action_image:** Thuộc tính quy định hoạt ảnh
+
+Áp dụng Struct trên cho các đối tượng:
+- ar_game_object_t archery
+- ar_game_object_t arrow
+- ar_game_object_t meteoroid
+- ar_game_object_t bang
+- ar_game_object_t border
+
+Các biến quan trọng:
+- ar_game_score: Điểm của trò chơi
+- ar_game_status: Trạng thái quả trò chơi
+  - GAME_OFF: Tắt 
+  - GAME_ON: Bật
+  - GAME_OVER: Đã thua
+
+- **ar_game_setting_t** settingsetup : cấp độ trò chơi
+  - settingsetup.silent : Quy định âm thanh ON/OFF
+  - settingsetup.num_arrow : Số lượng mũi tên
+  - settingsetup.arrow_speed : Tốc độ mũi tên
+  - settingsetup.meteoroid_speed : Tốc độ của thiên thạch
+
+<!-- [<img src="images\table_variable.png" width="720720"/>](https://github.com/QuocBuu/archery_game.git)
 
 __(*)__ action_image là 1 biến chuyên dụng để chuyển animation, có thể cần thiết với các game muốn sinh động còn không có thể bỏ qua
-__(**)__ giá trị ban đầu được lưu trữ trong eeprom để không bị mất lúc reset kit
+__(**)__ giá trị ban đầu được lưu trữ trong eeprom để không bị mất lúc reset kit -->
 
 #### 2.2.2	Quản lý task
 Trong lập trình sự kiện (event-driven programming), một task là một đơn vị công việc độc lập được thực thi khi xảy ra một sự kiện cụ thể. Tác dụng của task là xử lý và đáp ứng cho các sự kiện trong hệ thống. Một số tác dụng quan trọng của task code:
@@ -185,8 +212,12 @@ Trong game này Signal có các tác dụng như:
 - AR_GAME_ARCHERY_RESET - Cài đặt lại thuộc tính trước khi **End Game**
 
 **Sequence diagram:**
+<<<<<<< HEAD
+[<img src="images\sequence_object\archery_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
+=======
 
 [<img src="images\archery_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
+>>>>>>> dba93ae84398794c9b537e8e2f1ac0ef6b65062c
 
 **Code:**
 <details>
@@ -285,8 +316,12 @@ void ar_game_archery_handle(ak_msg_t* msg) {
 - AR_GAME_ARROW_RESET - Cài đặt lại thuộc tính trước khi **End Game**
 
 **Sequence diagram:**
+<<<<<<< HEAD
+[<img src="images\sequence_object\arrow_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
+=======
 
 [<img src="images\arrow_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
+>>>>>>> dba93ae84398794c9b537e8e2f1ac0ef6b65062c
 
 **Code:**
 <details>
@@ -403,8 +438,12 @@ void ar_game_arrow_handle(ak_msg_t* msg) {
 - AR_GAME_BANG_RESET - Cài đặt lại thuộc tính trước khi **End Game**
 
 **Sequence diagram:**
+<<<<<<< HEAD
+[<img src="images\sequence_object\bang_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
+=======
 
 [<img src="images\bang_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
+>>>>>>> dba93ae84398794c9b537e8e2f1ac0ef6b65062c
 
 **Code:**
 <details>
@@ -497,8 +536,12 @@ void ar_game_bang_handle(ak_msg_t* msg) {
 - AR_GAME_CHECK_GAME_OVER - Kiểm tra thiên thạch chạm vào ranh giới
 
 **Sequence diagram:**
+<<<<<<< HEAD
+[<img src="images\sequence_object\border_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
+=======
 
 [<img src="images\border_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
+>>>>>>> dba93ae84398794c9b537e8e2f1ac0ef6b65062c
 
 **Code:**
 <details>
@@ -599,8 +642,12 @@ void ar_game_border_handle(ak_msg_t* msg) {
 - AR_GAME_METEOROID_RESET - Cài đặt lại thuộc tính trước khi **End Game**
 
 **Sequence diagram:**
+<<<<<<< HEAD
+[<img src="images\sequence_object\meteoroid_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
+=======
 
 [<img src="images\meteoroid_sequence.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
+>>>>>>> dba93ae84398794c9b537e8e2f1ac0ef6b65062c
 
 **Code:**
 <details>
@@ -720,7 +767,10 @@ Trong trò chơi, màn hình hiện thị là 1 màn hình LCD có kích thướ
 Đồ họa được thiết kế từng phần theo từng đối tượng bằng phần mềm [Photopea](https://www.photopea.com/)
 
 #### Thiết kế đồ họa cho các đối tượng
+<<<<<<< HEAD
+=======
 
+>>>>>>> dba93ae84398794c9b537e8e2f1ac0ef6b65062c
 [<img src="images\table_bitmap.png" width="720"/>](https://github.com/QuocBuu/archery_game.git)
 
 **Ghi chú:** trong thiết kế trên có nhiều hoạt ảnh cho cùng 1 đối tượng là để tạo animation cho đối tượng đó tăng cảm giác lúc chơi game.
@@ -1095,11 +1145,4 @@ static const Tone_TypeDef tones_merryChrismast[] = {
 
 **Ghi chú:** Nêu không có thời gian hay không có kiếu âm nhạc thì tốt nhất nên dùng các thư viện trên github
 
-## V. Kết luận
-### 5.1 Tóm tắt nội dung
-Tài liều tóm tắt về quá trình làm 1 con game trên AK Embedded Base Kit - STM32L151
-
-Đi sau vào 2 nội dung chính là:
-- Mô tả cách mô hình hóa đối tượng trong trò chơi bắn cung.
-- Sử dụng kết hợp lập trình hướng đối tượng và lập trình dựa trên sự kiện (event-driven) để xác định thuộc tính và xử lý các sự kiện trong trò chơi.
 
