@@ -1,6 +1,17 @@
 # Lập trình event-driven và trực quan cho trò chơi bắn cung: Hướng dẫn từ cơ bản đến nâng cao
 ## I. Giới thiệu - ARCHERY GAME
-### 1.1 Mô tả trò chơi và đối tượng
+### 1.1 Phần cứng
+
+[<img src="images\AK_Embedded_Base_Kit_STM32L151.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
+#### 
+
+AK Embedded Base Kit là một công cụ đánh giá dành cho các bạn học phần mềm nhúng nâng cao.
+
+KIT tích hợp LCD Oled 1.3", 3 nút nhấn, và 1 loa Buzzer phát nhạc, với các trang bị này thì đã đủ để học hệ thống event-driven thông qua thực hành thiết kế máy chơi game.
+
+KIT cũng tích hợp RS485, NRF24L01+, và Flash lên đến 32MB, thích hợp cho prototype các ứng dụng thực tế trong hệ thống nhúng hay sử dụng như: truyền thông có dây, không dây wireless, các ứng dụng lưu trữ data logger,...
+
+### 1.2 Mô tả trò chơi và đối tượng
 Phần mô tả sau đây về “Archery game” phục vụ mục đích là giải thích cách chơi và các đặc tính kỹ thuật nhằm mục đích thiết kế và triển khai phần mềm và phát triển các dự án game ở phần sau chương trình này.
 
 [<img src="images\menu_game.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
@@ -32,15 +43,7 @@ Game sẽ kết thúc khi thiên thạch (Meteoroid) chạm phải ranh giới (
 - **Charts:** vào xem bảng xếp hạng.
 - **Home:** về lại menu game.
 
-### 1.2 Phần cứng
 
-[<img src="images\AK_Embedded_Base_Kit_STM32L151.png" width="480"/>](https://github.com/QuocBuu/archery_game.git)
-
-AK Embedded Base Kit là một evaluation kit dành cho các bạn học software embedded nâng cao.
-
-KIT tích hợp LCD Oled 1.3", 3 nút nhấn, và 1 loa Buzzer phát nhạc, với các trang bị này thì đã đủ để học hệ thống event-driven thông qua thực hành thiết kế máy chơi game.
-
-KIT cũng tích hợp RS485, NRF24L01+, và Flash lên đến 32MB, thích hợp cho prototype các ứng dụng thực tế trong hệ thống nhúng hay sử dụng như: truyền thông có dây, không dây wireless, các ứng dụng lưu trữ data logger,...
 
 #### Thao tác trong game:
 - Trong game người chơi có thể sử dụng 2 nút **[Up]** và **[Down]** để điều hướng chọn mục hay điều khiển Cung tên (Archery) lên xuống.
@@ -120,26 +123,17 @@ Việc liệt kê các thuộc tính của đối tượng trong game có các t
 - Thiết kế cấu trúc dữ liệu: Liệt kê thuộc tính giúp xác định cấu trúc dữ liệu phù hợp để lưu trữ thông tin của đối tượng.
 - Giảm rủi ro và lỗi: Khi bạn xác định trước các thuộc tính cần thiết, bạn giảm thiểu khả năng bỏ sót hoặc nhầm lẫn trong việc xử lý và sử dụng các thuộc tính.
 
-**Name:** struct ar_game_object_t
-
-**Cấu trúc:** 
-```sh
-typedef struct {
-    bool visible;
-    uint32_t x, y;
-    uint8_t action_image;
-} ar_game_object_t;
-```
+**Thuộc tính:** 
 - **visible:** Thuộc tính quy định hiển thị
 - **x, y:** Thuộc tính tọa độ
 - **action_image:** Thuộc tính quy định hoạt ảnh
 
-Áp dụng Struct trên cho các đối tượng:
-- ar_game_object_t archery
-- ar_game_object_t arrow
-- ar_game_object_t meteoroid
-- ar_game_object_t bang
-- ar_game_object_t border
+Áp dụng struct trên cho các đối tượng:
+- ar_game_archery_t archery
+- ar_game_arrow_t arrow
+- ar_game_bang_t bang
+- ar_game_border_t border
+- ar_game_meteoroid_t meteoroid
 
 Các biến quan trọng:
 - ar_game_score: Điểm của trò chơi
