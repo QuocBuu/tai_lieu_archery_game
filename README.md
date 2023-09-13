@@ -61,12 +61,13 @@ Khi Meteoroid chạm vào Border, trò chơi sẽ kết thúc. Các đối tư�
 - **Home:** về lại menu game.
 
 ## II. Thiết kế - ARCHERY GAME
-#### Các khái niệm trong event-driven
+**Các khái niệm trong event-driven:**
+
 **Event:** Sự kiện là một hoạt động xảy ra trong hệ thống. Sự kiện có thể được khởi tạo bởi người dùng hoặc tự động xảy ra trong chương trình.
 
 **Event Handling:** Xử lý sự kiện là quá trình xác định cách chương trình phản ứng khi một sự kiện xảy ra. Điều này bao gồm việc cung cấp mã xử lý (event handler) để thực hiện các hành động tương ứng với sự kiện. Mã xử lý được gắn kết với sự kiện và sẽ được gọi tự động khi sự kiện xảy ra.
 
-### 2.1 Sơ đồ trình tự (The sequence diagram)
+### 2.1 Sơ đồ trình tự
 **Sơ đồ trình tự** được sử dụng để mô tả và hiển thị trình tự của các thông điệp và tương tác giữa các đối tượng trong một hệ thống.
 
 <center><img src="images\sequence_object\All_game_UML.png" width="720"/>
@@ -365,6 +366,10 @@ Trong trò chơi, màn hình hiện thị là 1 màn hình LCD có kích thướ
 <center><img src="images\table_bitmap.png" width="720"/>
 
 *Hình 13: Bitmap của các đối tượng* </center>
+
+**Bitmap** là một cấu trúc dữ liệu được sử dụng để lưu trữ và hiển thị hình ảnh trong game.
+
+**Animation** là ứng dụng việc nối ảnh của của nhiều ảnh liên tiếp tạo thành hoạt ảnh cho đổi tượng muốn miêu tả. Trong game này tôi dùng biến “action_image” trong đối tượng để thay đổi hoạt ảnh thành animation.
 
 **Ghi chú:** trong thiết kế trên có nhiều hoạt ảnh cho cùng 1 đối tượng là để tạo animation cho đối tượng đó tăng cảm giác lúc chơi game.
 
@@ -737,8 +742,3 @@ static const Tone_TypeDef tones_merryChrismast[] = {
 </details>
 
 **Ghi chú:** Nêu không có thời gian hay không có kiếu âm nhạc thì tốt nhất nên dùng các thư viện trên github
-
-# Phụ Lục 
-**Bitmap** là một cấu trúc dữ liệu được sử dụng để lưu trữ và hiển thị hình ảnh trong game.
-
-**Animation** là ứng dụng việc nối ảnh của của nhiều ảnh liên tiếp tạo thành hoạt ảnh cho đổi tượng muốn miêu tả. Trong game này tôi dùng biến “action_image” trong đối tượng để thay đổi hoạt ảnh thành animation.
