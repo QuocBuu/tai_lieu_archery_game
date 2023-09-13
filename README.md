@@ -123,12 +123,12 @@ Khi Meteoroid chạm vào Border, trò chơi sẽ kết thúc. Các đối tư�
 - **Change the screeen:** Chuyển màn hình
 
 
-### 2.2 Chi tiết đối tượng
+### 2.2 Chi tiết
 
 Sau khi xác định được các đối tượng trong game mà chúng ta cần, tiếp theo chúng ta phải liệt kê ra các thuộc tính, các task, các signal và bitmap mà trong game sẽ sử dụng tới.
 Việc liệt kê càng chi tiết thì việc làm game diễn ra càng nhanh và tạo tình rõ ràng minh bạch cho phần tài nguyên giúp phần code game diễn ra xuông sẽ hơn.
 
-#### 2.2.1	Thuộc tính đối tượng - struct
+#### 2.2.1	Thuộc tính đối tượng
 Việc liệt kê các thuộc tính của đối tượng trong game có các tác dụng quan trọng sau:
 - Liệt kê các thuộc tính giúp xác định rõ thông tin về đối tượng trong game.
 - Liệt kê thuộc tính giúp xác định cấu trúc dữ liệu phù hợp để lưu trữ thông tin của đối tượng.
