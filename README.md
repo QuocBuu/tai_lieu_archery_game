@@ -51,7 +51,7 @@ Trò chơi bắt đầu với màn hình **Menu game** với nhiều chọn lự
 - Lên level: Để tạo độ khó cho game thì chứ mỗi lần đạt được 200 điểm thì tốc độ của Meteoroid.
 - Animation: Để trò chơi thêm phần sinh động thì các đối tượng sẽ có thêm hoạt ảnh lúc di chuyển.
 
-<center>[<img src="images\game_over.png" width="480"/>]
+<center><img src="images\game_over.png" width="480"/>
 
 *Hình 4: Màn hình Game_over* </center>
 
