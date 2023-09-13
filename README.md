@@ -214,7 +214,7 @@ Khi code về 1 đối tượng ta nên lập ra cho đối tượng 1 struct ba
 
     extern ar_game_archery_t archery;
 
-Khi viết code trong đối tượng nếu muốn rõ rành và rành mạch bạn có thể đưa các phần code dài ra ngoài khỏi Handle tạo thành các #define như đoạn code dưới như vậy thì khi nhìn vào Handle chúng ta sẽ không bị rối.
+Khi viết code trong đối tượng nếu muốn rõ ràng và rành mạch bạn có thể đưa các phần code dài ra ngoài khỏi Handle tạo thành các #define như đoạn code dưới như vậy thì khi nhìn vào Handle chúng ta sẽ không bị rối.
 
 ```sh
 #include "ar_game_archery.h"
