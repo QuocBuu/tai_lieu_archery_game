@@ -149,12 +149,15 @@ Ví dụ:
     extern ar_game_archery_t archery;
 
 **Áp dụng struct cho các đối tượng:**
-|struct|
-ar_game_archery_t
-- ar_game_arrow_t
-- ar_game_bang_t
-- ar_game_border_t
-- ar_game_meteoroid_t
+|struct|Các biến|
+|---|---|
+|ar_game_archery_t|archery|
+|ar_game_arrow_t|arrow[MAX_NUM_ARROW]|
+|ar_game_bang_t|bang[NUM_BANG]|
+|ar_game_border_t|border|
+|ar_game_meteoroid_t|meteoroid[NUM_METEOROIDS]|
+
+(*)Các đối tượng có số lượng nhiều thì sẽ được khai báo dạng mảng.
 
 **Các biến quan trọng:**
 - ar_game_score: Điểm của trò chơi
