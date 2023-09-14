@@ -388,7 +388,7 @@ Trong trò chơi, màn hình hiện thị là 1 màn hình LCD có kích thướ
 
 **Bitmap** là một cấu trúc dữ liệu được sử dụng để lưu trữ và hiển thị hình ảnh trong game.
 
-**Animation** là ứng dụng việc nối ảnh của của nhiều ảnh liên tiếp tạo thành hoạt ảnh cho đổi tượng muốn miêu tả. Trong game này tôi dùng biến “action_image” trong đối tượng để thay đổi hoạt ảnh thành animation.
+**Animation** là ứng dụng việc nối ảnh của của nhiều ảnh liên tiếp tạo thành hoạt ảnh cho đổi tượng muốn miêu tả. Trong game, biến “action_image” trong đối tượng được sử dụng nối các ảnh theo thứ tự tạo thành animation.
 
 **Ghi chú:** trong thiết kế trên có nhiều hoạt ảnh cho cùng 1 đối tượng là để tạo animation cho đối tượng đó tăng cảm giác lúc chơi game.
 
