@@ -30,13 +30,13 @@ Trò chơi bắt đầu với màn hình **Menu game** với nhiều chọn lự
 *Hình 3: Màn hình Game_play và các đối tượng* </center>
 
 #### Các đối tượng trong game:
-|Tên đối tượng|Tác dụng|
-|---|---|
-|**Archey** - Cung tên|Nơi bắn ra mũi tên|
-|**Arrow** - Mũi tên|Bắn ra từ cung tên để phá hủy thiên thạch|
-|**Bang** - Vụ nổ |Xuất hiện khi thiên thạch bị phá hủy|
-|**Border** - Ranh giới |Vùng an toàn phải bảo vệ không cho thiên thạch rơi vào|
-|**Meteoroid** - Thiên thạch |Đối tượng bay về phía vùng an toàn có thể phá hủy bởi mũi tên|
+|Object|Tên đối tượng|Tác dụng|
+|---|---|---|
+|**Archey**|Cung tên|Nơi bắn ra mũi tên|
+|**Arrow**|Mũi tên|Bắn ra từ cung tên để phá hủy thiên thạch|
+|**Bang**|Vụ nổ |Xuất hiện khi thiên thạch bị phá hủy|
+|**Border**|Ranh giới |Vùng an toàn phải bảo vệ không cho thiên thạch rơi vào|
+|**Meteoroid**|Thiên thạch |Đối tượng bay về phía vùng an toàn có thể phá hủy bởi mũi tên|
 
 (*) Trong phần còn lại của tài liệu sẽ dùng tên của các đối tượng để đề cập đến đối tượng.
 
@@ -83,7 +83,7 @@ Khi Meteoroid chạm vào Border, trò chơi sẽ kết thúc. Các đối tư�
 - **AR_GAME_BANG_SETUP:** Thiết lập thông số ban đầu cho các đối tượng Bang
 - **AR_GAME_BORDER_SETUP:** Thiết lập thông số ban đầu cho đối tượng Border
 - **Setup timer - Time tick:** Khởi tạo Timer - Time tick cho game.
-- **STATUS (GAME_ON):** Cập nhật trạng thái game -> GAME_ON
+- **STATE (GAME_ON):** Cập nhật trạng thái game -> GAME_ON
 
 **GAME PLAY:** Quá trình hoạt động của game.
 
@@ -106,7 +106,7 @@ Khi Meteoroid chạm vào Border, trò chơi sẽ kết thúc. Các đối tư�
 - **AR_GAME_CHECK_GAME_OVER:** Kiểm tra thấy có Meteoroid chạm vào Border. Gửi Signal - **AR_GAME_RESET** đến **Screen**
 
 **RESET GAME:** Quá trình cài đặt lại các thông số trước khi thoát game.
-- **STATUS (GAME_OVER):** Cập nhật trạng thái game -> GAME_OVER
+- **STATE (GAME_OVER):** Cập nhật trạng thái game -> GAME_OVER
 - **AR_GAME_RESET:** Signal cài đặt lại game do Border gửi đến.
 - **AR_GAME_ARCHERY_RESET:** Cài đặt lại đối tượng Cung tên trước khi thoát.
 - **AR_GAME_ARROW_RESET:** Cài đặt lại đối tượng Arrow trước khi thoát.
@@ -119,9 +119,8 @@ Khi Meteoroid chạm vào Border, trò chơi sẽ kết thúc. Các đối tư�
 
 **EXIT:** Thoát khỏi game và chuyển sang màn hình khác.
 - **AR_GAME_EXIT:** Signal do Timer exit gửi đến.
-- **STATUS (GAME_OFF):** Cập nhật trạng thái game -> GAME_OFF
-- **Change the screeen:** Chuyển màn hình
-
+- **STATE (GAME_OFF):** Cập nhật trạng thái game -> GAME_OFF
+- **Change the screeen - SCREEN_TRAN(scr_game_over_handle, &scr_game_over):** Chuyển màn hình sang màn hình Game Over.
 
 ### 2.2 Chi tiết
 
@@ -138,6 +137,24 @@ Việc liệt kê các thuộc tính của đối tượng trong game có các t
 - visible: Quy định hiển thị của đối tượng.
 - x, y: Quy định vị trí của đối tượng trên màn hình.
 - action_image: Quy định hoạt ảnh tạo animation.
+
+Ví dụ:
+
+    typedef struct {
+        bool visible;
+        uint32_t x, y;
+        uint8_t action_image;
+    } ar_game_archery_t;
+
+    extern ar_game_archery_t archery;
+
+**Áp dụng struct cho các đối tượng:**
+|struct|
+ar_game_archery_t
+- ar_game_arrow_t
+- ar_game_bang_t
+- ar_game_border_t
+- ar_game_meteoroid_t
 
 **Các biến quan trọng:**
 - ar_game_score: Điểm của trò chơi
@@ -204,89 +221,88 @@ Trong code bạn có thể dùng cấu trúc:
 
     Cấu trúc này có thể thay thế hàm void trong nhiều trường hợp.
 
-Khi code về 1 đối tượng ta nên lập ra cho đối tượng 1 struct bao gồm các thuộc tính của để dễ trong việc sử dụng:
+Khai báo: Thư viện, struct và biến
 
-    typedef struct {
-        bool visible;
-        uint32_t x, y;
-        uint8_t action_image;
-    } ar_game_archery_t;
+	#include "ar_game_archery.h"
 
-    extern ar_game_archery_t archery;
+	ar_game_archery_t archery;
+	static uint32_t archery_y = AXIS_Y_ARCHERY;
 
-Khi viết code trong đối tượng nếu muốn rõ ràng và rành mạch bạn có thể đưa các phần code dài ra ngoài khỏi Handle tạo thành các #define như đoạn code dưới như vậy thì khi nhìn vào Handle chúng ta sẽ không bị rối.
+AR_GAME_ARCHERY_SETUP() là một macro được dùng định nghĩa để cài đặt trạng thái ban đầu của trò chơi cung bắn. Nó đặt các giá trị của biến archery và sử dụng các hằng số được định nghĩa trước đó để thiết lập tọa độ, màu sắc và hình ảnh của cung.
 
-```sh
-#include "ar_game_archery.h"
+	#define AR_GAME_ARCHERY_SETUP() \
+	do { \
+		archery.x = AXIS_X_ARCHERY; \
+		archery.y = AXIS_Y_ARCHERY; \
+		archery.visible = WHITE; \
+		archery.action_image = 1; \
+	} while (0);
 
-ar_game_archery_t archery;
-static uint32_t archery_y = AXIS_Y_ARCHERY;
+AR_GAME_ARCHERY_UP() là một macro được sử dụng để di chuyển cung lên trên. Nó giảm giá trị của archery_y bằng một giá trị STEP_ARCHERY_AXIS_Y và kiểm tra nếu giá trị mới bằng 0, nó được gán lại là 10.
 
-#define AR_GAME_ARCHERY_SETUP() \
-do { \
-    archery.x = AXIS_X_ARCHERY; \
-    archery.y = AXIS_Y_ARCHERY; \
-    archery.visible = WHITE; \
-    archery.action_image = 1; \
-} while (0);
+	#define AR_GAME_ARCHERY_UP() \
+	do { \
+		archery_y -= STEP_ARCHERY_AXIS_Y; \
+		if (archery_y == 0) {archery_y = 10;} \
+	} while(0);
 
-#define AR_GAME_ARCHERY_UP() \
-do { \
-    archery_y -= STEP_ARCHERY_AXIS_Y; \
-    if (archery_y == 0) {archery_y = 10;} \
-} while(0);
+AR_GAME_ARCHERY_DOWN() là một macro được sử dụng để di chuyển cung xuống dưới. Nó tăng giá trị của archery_y bằng một giá trị STEP_ARCHERY_AXIS_Y và kiểm tra nếu giá trị mới vượt quá 50, nó được gán lại là 50.
 
-#define AR_GAME_ARCHERY_DOWN() \
-do { \
-    archery_y += STEP_ARCHERY_AXIS_Y; \
-    if (archery_y > 50) {archery_y = 50;} \
-} while(0);
+	#define AR_GAME_ARCHERY_DOWN() \
+	do { \
+		archery_y += STEP_ARCHERY_AXIS_Y; \
+		if (archery_y > 50) {archery_y = 50;} \
+	} while(0);
 
-#define AR_GAME_ARCHERY_RESET() \
-do { \
-    archery.x = AXIS_X_ARCHERY; \
-    archery.y = AXIS_Y_ARCHERY; \
-    archery.visible = BLACK; \
-    archery_y = AXIS_Y_ARCHERY; \
-} while(0);
+AR_GAME_ARCHERY_RESET() là một macro được sử dụng để đặt lại trạng thái ban đầu của trò chơi cung bắn. Nó đặt lại giá trị của archery, archery_y và làm cho cung trở nên không hiển thị.
 
-void ar_game_archery_handle(ak_msg_t* msg) {
-    switch (msg->sig) {
-    case AR_GAME_ARCHERY_SETUP: {
-        APP_DBG_SIG("AR_GAME_ARCHERY_SETUP\n");
-        AR_GAME_ARCHERY_SETUP();
-    }
-        break;
+	#define AR_GAME_ARCHERY_RESET() \
+	do { \
+		archery.x = AXIS_X_ARCHERY; \
+		archery.y = AXIS_Y_ARCHERY; \
+		archery.visible = BLACK; \
+		archery_y = AXIS_Y_ARCHERY; \
+	} while(0);
 
-    case AR_GAME_ARCHERY_UPDATE: {
-        APP_DBG_SIG("AR_GAME_ARCHERY_UPDATE\n");
-        archery.y = archery_y;
-    }
-        break;
+Hàm ar_game_archery_handle() là một hàm xử lý các thông điệp (messages) liên quan đến trò chơi cung bắn. Nó chứa một câu lệnh switch-case để xử lý các thông điệp khác nhau. Các thông điệp được gửi đến hàm này thông qua một tham số msg có kiểu dữ liệu ak_msg_t. Mỗi case trong switch-case xử lý một thông điệp cụ thể.
 
-    case AR_GAME_ARCHERY_UP: {
-        APP_DBG_SIG("AR_GAME_ARCHERY_UP\n");
-        AR_GAME_ARCHERY_UP();
-    }
-        break;
+	void ar_game_archery_handle(ak_msg_t* msg) {
+		switch (msg->sig) {
+		case AR_GAME_ARCHERY_SETUP: {
+			APP_DBG_SIG("AR_GAME_ARCHERY_SETUP\n");
+			AR_GAME_ARCHERY_SETUP();
+		}
+			break;
 
-    case AR_GAME_ARCHERY_DOWN: {
-        APP_DBG_SIG("AR_GAME_ARCHERY_DOWN\n");
-        AR_GAME_ARCHERY_DOWN();
-    }
-        break;
+		case AR_GAME_ARCHERY_UPDATE: {
+			APP_DBG_SIG("AR_GAME_ARCHERY_UPDATE\n");
+			archery.y = archery_y;
+		}
+			break;
 
-    case AR_GAME_ARCHERY_RESET: {
-        APP_DBG_SIG("AR_GAME_ARCHERY_RESET\n");
-        AR_GAME_ARCHERY_RESET();
-    }
-        break;
+		case AR_GAME_ARCHERY_UP: {
+			APP_DBG_SIG("AR_GAME_ARCHERY_UP\n");
+			AR_GAME_ARCHERY_UP();
+		}
+			break;
 
-    default:
-        break;
-    }
-}
-```
+		case AR_GAME_ARCHERY_DOWN: {
+			APP_DBG_SIG("AR_GAME_ARCHERY_DOWN\n");
+			AR_GAME_ARCHERY_DOWN();
+		}
+			break;
+
+		case AR_GAME_ARCHERY_RESET: {
+			APP_DBG_SIG("AR_GAME_ARCHERY_RESET\n");
+			AR_GAME_ARCHERY_RESET();
+		}
+			break;
+
+		default:
+			break;
+		}
+	}
+
 
 ### 3.2 Arrow
 
